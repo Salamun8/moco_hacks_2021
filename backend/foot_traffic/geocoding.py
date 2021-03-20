@@ -1,6 +1,6 @@
-import requests
+# import requests
 
-g_api_key = "AIzaSyA592HwCkixwp7W8zRekEf2NZuyfKZNfvc"
+# g_api_key = "AIzaSyA592HwCkixwp7W8zRekEf2NZuyfKZNfvc"
 
 def address_formatter(address, city, state, zip_code):
     # Ex: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
@@ -70,5 +70,5 @@ def master_geocoding(google_api_key, address, city, state, zip_code):
     return get_lat_long_locType(google_api_key, address, city, state, zip_code)
 
 # Tester Code
-print(master_geocoding(g_api_key, "10804 Brewer House Road", "Rockville", "MD", "20852"))
-print(master_geocoding(g_api_key, "6400 Rock Spring Dr", "Bethesda", "MD", "20814"))
+# print(master_geocoding(g_api_key, "10804 Brewer House Road", "Rockville", "MD", "20852"))
+# print(master_geocoding(g_api_key, "6400 Rock Spring Dr", "Bethesda", "MD", "20814"))
