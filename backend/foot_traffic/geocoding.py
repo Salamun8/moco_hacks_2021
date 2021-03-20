@@ -30,7 +30,9 @@ def get_lat_long_locType(address, city, state, zip_code):
         results = r.json()["results"][0]
         lat = results["geometry"]["location"]["lat"]
         long = results["geometry"]["location"]["lng"]
-        locType = results["geometry"]["location_type"]
+        # locType = results["geometry"]["location_type"]
+        # Default Place type, since not using Places API
+        locType = "shopping_mall"
         return [lat, long, locType]
 
         # NEED TO CREATE IF STATEMENTS FOR THE STUFF BELOW!!!
