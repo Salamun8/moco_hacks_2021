@@ -1,5 +1,5 @@
 import requests
-import backend.foot_traffic.geocoding as gc
+import geocoding as gc
 
 g_api_key = "AIzaSyA592HwCkixwp7W8zRekEf2NZuyfKZNfvc"
 
