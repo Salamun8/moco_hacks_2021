@@ -5,6 +5,7 @@
 #
 ## **Main Groups**
 1. COVID-19 risk calculator based on an input address
+    - Libraries used: `datetime`, and `requests`
     - Parameters: `google_api_key, address, city, state, zip_code, search_radius`
         - state needs to be formatted in their 2-letter, all caps format
         - Sample parameters (for the Empire State Building): `g_api_key, "20 W 34th St", "New York", "NY", "10001", radius`
@@ -20,4 +21,5 @@
                 - This is checked against a list of important types that signify a location that usually has a lot of people, and the total number of important locations is stored
         - The raw number from c.ii. is taken and multiplied by a weight relative to the current hour of day before being divided by the maximum time-weighted and multiplied by 100 to get a scale of risk from 0-100: `risk_rating_scaler(google_api_key, address, city, state, zip_code, search_radius)`
             - Weightage approximates typical times when people are the busiest on a  0.0-1.0 scale
-        - The 100 scale is divided in thirds to output a low, medium, or high risk level that is turned into a visual representation in the GUI: `risk_rating_scaler(google_api_key, address, city, state, zip_code, search_radius) & tkinter GUI code`
+        - The 100 scale is divided in thirds to output a low, medium, or high risk level that is returned to be turned into a visual representation in the GUI: `risk_rating_scaler(google_api_key, address, city, state, zip_code, search_radius) & tkinter GUI code`
+            - Sample (for the Empire State Building): `risk_rating_scaler(g_api_key, "20 W 34th St", "New York", "NY", "10001", radius)`
