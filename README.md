@@ -11,6 +11,7 @@
         - Contains all code for foot traffic processing & geocoding.
     - `backend` --> `foot_traffic` --> `geocoding.py`
         - Contains all code for geocoding.
+    - **Prerequisite**: [`Google API Key`](https://developers.google.com/maps/documentation/javascript/get-api-key)
 #
 # **APIs USED**
 #### [`Google Geocoding API`](https://developers.google.com/maps/documentation/geocoding/overview)
@@ -19,7 +20,10 @@
 # **DOCUMENTATION**
 ## **Main Groups**
 1. COVID-19 risk calculator based on an input address
-    - Libraries used: [`datetime`](https://docs.python.org/3/library/datetime.html), and [`requests`](https://requests.readthedocs.io/en/master/)
+    - Libraries used: [`datetime`](https://docs.python.org/3/library/datetime.html), and [`requests`](https://pypi.org/project/requests/)
+        - Pip installation commands:
+            - `datetime`: `pip install DateTime`
+            - `requests`: `pip install requests`
     - Parameters: `google_api_key, address, city, state, zip_code, search_radius`
         - state needs to be formatted in their 2-letter, all caps format
         - Sample parameters (for the Empire State Building): `g_api_key, "20 W 34th St", "New York", "NY", "10001", radius`
