@@ -11,11 +11,11 @@
         - Contains all code for foot traffic processing & geocoding.
     - `backend` --> `foot_traffic` --> `geocoding.py`
         - Contains all code for geocoding.
-    - **Prerequisite**: [`Google API Key`](https://developers.google.com/maps/documentation/javascript/get-api-key)
 #
 # **APIs USED**
 #### [`Google Geocoding API`](https://developers.google.com/maps/documentation/geocoding/overview)
 #### [`Google Places API`](https://developers.google.com/maps/documentation/places/web-service/overview)
+#### **Prerequisite**: [`Google API Key`](https://developers.google.com/maps/documentation/javascript/get-api-key)
 #
 # **DOCUMENTATION**
 ## **Main Groups**
