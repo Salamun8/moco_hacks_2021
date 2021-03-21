@@ -12,6 +12,10 @@
     - `backend` --> `foot_traffic` --> `geocoding.py`
         - Contains all code for geocoding.
 #
+# **APIs USED**
+#### [`Google Geocoding API`](https://developers.google.com/maps/documentation/geocoding/overview)
+#### [`Google Places API`](https://developers.google.com/maps/documentation/places/web-service/overview)
+#
 # **DOCUMENTATION**
 ## **Main Groups**
 1. COVID-19 risk calculator based on an input address
