@@ -15,7 +15,7 @@
 # **DOCUMENTATION**
 ## **Main Groups**
 1. COVID-19 risk calculator based on an input address
-    - Libraries used: `datetime`, and `requests`
+    - Libraries used: [`datetime`](https://docs.python.org/3/library/datetime.html), and [`requests`](https://requests.readthedocs.io/en/master/)
     - Parameters: `google_api_key, address, city, state, zip_code, search_radius`
         - state needs to be formatted in their 2-letter, all caps format
         - Sample parameters (for the Empire State Building): `g_api_key, "20 W 34th St", "New York", "NY", "10001", radius`
