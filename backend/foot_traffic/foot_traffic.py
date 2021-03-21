@@ -1,34 +1,18 @@
 import geocoding as gc
 # import populartimes
-import livepopulartimes
-
+# import livepopulartimes
+import datetime as dt
 import requests
 
 g_api_key = "AIzaSyA592HwCkixwp7W8zRekEf2NZuyfKZNfvc"
-
-def master_at_location(google_api_key, address, city, state, zip_code):
-    geo_data = gc.master_geocoding(google_api_key, address, city, state, zip_code)
-    latitude = geo_data[0]
-    longitude = geo_data[1]
-    location_type = geo_data[2]
-    place_id = geo_data[3]
-
-    # raw_risk_data = populartimes.get_id(google_api_key, place_id)["populartimes"]
-    formatted_address = gc.address_formatter(address, city, state, zip_code)
-    formatted_address = "(Gran Morsi) " +formatted_address
-
-    # raw_risk_data = livepopulartimes.get_populartimes_by_address(formatted_address)["current_popularity"]
-    raw_risk_data = livepopulartimes.get_populartimes_by_PlaceID(google_api_key, place_id)
-
-    return raw_risk_data
+radius = 0.5
 
 
 def key_buildings_search(google_api_key, address, city, state, zip_code, search_radius):
     search_results = None
     important_types = ["airport", "amusement_park", "aquarium", "art_gallery", "bank", "casino", "clothing_store", 
-    "convenience_store", "department_store", "drugstore", "electronics_store", "furniture_store", "hardware_store", 
-    "home_goods_store", "movie_theater", "museum", "park", "pharmacy", "restaurant", "shopping_mall", "stadium", 
-    "store", "subway_station", "supermarket", "tourist_attraction", "zoo", "premise"]
+    "convenience_store", "department_store", "drugstore", "movie_theater", "museum", "park", "pharmacy", "restaurant", "shopping_mall", "stadium", 
+    "store", "subway_station", "supermarket", "tourist_attraction", "zoo", "lodging"]
 
     is_important = False
     radius = 1609.34 * search_radius
@@ -55,27 +39,29 @@ def key_buildings_search(google_api_key, address, city, state, zip_code, search_
         k = 0
         already_true = False
         while (i<raw_number):
+            is_important = False
+            already_true = False
             types_length = len(search_results[i]["types"])
             k = 0
+            # while ((k < types_length) and (already_true == False)):
             while ((k < types_length) and (already_true == False)):
                 if(search_results[i]["types"][k] in important_types):
                     is_important = True
-                    if(already_true == False):
-                        already_true = True
+                    already_true = True
                     # final_number = final_number + 1
                 else:
                     is_important = False
                 
                 print(search_results[i]["types"][k])
                 k = k + 1
-            if((already_true != False)):
+            if((already_true == True)):
                 final_number = final_number + 1
             
             print(search_results[i]["types"])
             print(is_important)
             print(already_true)
-            is_important = False
-            already_true = False
+            # is_important = False
+            # already_true = False
             i = i + 1
             
 
@@ -108,10 +94,65 @@ def key_buildings_search(google_api_key, address, city, state, zip_code, search_
         pass
         return None
 
+def risk_rating_scaler(google_api_key, address, city, state, zip_code, search_radius):
+    try:
+        # ONLY BECAUSE KEY_BUILDINGS_SEARCH IS TEMPORARILY RETURNING 2 VALUES!!!
+        raw_value = int(key_buildings_search(google_api_key, address, city, state, zip_code, search_radius)[1])
+        current_hour = int(dt.datetime.now().hour)
+        time_weights = {
+            0: 0.2,
+            1: 0.1,
+            2: 0.1,
+            3: 0.1,
+            4: 0.1,
+            5: 0.2,
+            6: 0.3,
+            7: 0.4,
+            8: 0.5,
+            9: 0.5,
+            10: 0.5,
+            11: 0.6,
+            12: 0.6,
+            13: 0.7,
+            14: 0.7,
+            15: 1.0,
+            16: 1.0,
+            17: 1.0,
+            18: 0.8,
+            19: 0.8,
+            20: 0.8,
+            21: 0.5,
+            22: 0.5,
+            23: 0.2
+        }
+        max = 20 * 1.0
+        weighted_value = ((raw_value * time_weights[current_hour])/max) * 100
+        print(raw_value)
+        print("current hour: " + str(current_hour))
+        print(weighted_value)
+        if(weighted_value < 33.33):
+            return "low"
+        elif(weighted_value < 66.66):
+            return "medium"
+        elif(weighted_value <= 100):
+            return "high"
+        else:
+            return "Error"
+    except:
+        return "Error"
+
+
+
 # testing code
 # 10804 Brewer House Road, Rockville, MD 20852
     # [20,20]
 # 7101 Democracy Blvd, Bethesda, MD 20817
 # 285 Fulton St, New York, NY 10007
 # print(master_at_location(g_api_key, "22 Warren St", "New York", "NY", "10007"))
-print(key_buildings_search(g_api_key, "285 Fulton St", "New York", "NY", "10007", 1))
+print(risk_rating_scaler(g_api_key, "285 BigTitty St", "New York", "NY", "1007", radius))
+# print(key_buildings_search(g_api_key, "10804 Brewer House Road", "Rockville", "MD", "20852", radius))
+
+geo_data = gc.master_geocoding(g_api_key, "285 BigTitty St", "Bew York", "NZ", "10342432007")
+latitude = geo_data[0]
+longitude = geo_data[1]
+print(latitude, longitude)
