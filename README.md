@@ -13,7 +13,6 @@
         - Contains all code for geocoding.
 #
 # **DOCUMENTATION**
-#
 ## **Main Groups**
 1. COVID-19 risk calculator based on an input address
     - Libraries used: `datetime`, and `requests`
