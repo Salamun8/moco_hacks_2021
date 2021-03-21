@@ -1,5 +1,16 @@
 # **moco_hacks_2021**
-# **COVID-Safe**
+# **Corona-Safe**
+#
+# **FILE STRUCTURE BREAKDOWN**
+1. Final Product:
+    - `final_product` --> `coronasafe.py`
+        - Contains all the code for the project, including GUI
+            - This is because importing other python files and external functions is difficult in Tkinter.
+2. Foot Traffic Backend (not run in final product):
+    - `backend` --> `foot_traffic` --> `foot_traffic.py`
+        - Contains all code for foot traffic processing & geocoding.
+    - `backend` --> `foot_traffic` --> `geocoding.py`
+        - Contains all code for geocoding.
 #
 # **DOCUMENTATION**
 #
